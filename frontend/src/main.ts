@@ -59,6 +59,9 @@ async function loadMandelbrot(
   canvas.width = data.width
   canvas.height = data.height
 
+  canvas.style.width = "800px"
+  canvas.style.height = "800px"
+
   const imageData =
     ctx.createImageData(
       data.width,
@@ -69,7 +72,9 @@ async function loadMandelbrot(
 
     for (let x = 0; x < data.width; x++) {
 
-      const value = data.data[y][x]
+      const value = data.data[
+        data.height - 1 - y
+      ][x]
 
       const color =
         Math.min(
