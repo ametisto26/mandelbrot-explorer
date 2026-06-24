@@ -2,29 +2,62 @@ const app = document.querySelector<HTMLDivElement>("#app")!
 
 app.innerHTML = `
   <h1>Mandelbrot Explorer</h1>
+
+  <div>
+    <label>
+      cx:
+      <input id="cx" value="-0.75">
+    </label>
+
+    <label>
+      cy:
+      <input id="cy" value="0.1">
+    </label>
+
+    <label>
+      scale:
+      <input id="scale" value="1">
+    </label>
+
+    <button id="draw">
+      Draw
+    </button>
+  </div>
+
   <canvas id="canvas"></canvas>
 `
+
+const cxInput =
+  document.querySelector<HTMLInputElement>("#cx")!
+
+const cyInput =
+  document.querySelector<HTMLInputElement>("#cy")!
+
+const scaleInput =
+  document.querySelector<HTMLInputElement>("#scale")!
+
+const drawButton =
+  document.querySelector<HTMLButtonElement>("#draw")!
 
 const canvas =
   document.querySelector<HTMLCanvasElement>("#canvas")!
 
 const ctx = canvas.getContext("2d")!
 
-async function loadMandelbrot() {
+async function loadMandelbrot(
+  cx: number,
+  cy: number,
+  scale: number
+) {
 
   const response = await fetch(
-    "http://localhost:8000/mandelbrot?cx=-0.75&cy=0.1&scale=1"
+    `http://localhost:8000/mandelbrot?cx=${cx}&cy=${cy}&scale=${scale}`
   )
 
   const data = await response.json()
 
-  console.log(data)
-
   canvas.width = data.width
   canvas.height = data.height
-
-  // console.log(canvas.width)
-  // console.log(canvas.height)
 
   const imageData =
     ctx.createImageData(
@@ -62,4 +95,29 @@ async function loadMandelbrot() {
 
 }
 
-loadMandelbrot()
+drawButton.addEventListener(
+  "click",
+  () => {
+
+    const cx =
+      Number(cxInput.value)
+
+    const cy =
+      Number(cyInput.value)
+
+    const scale =
+      Number(scaleInput.value)
+
+    loadMandelbrot(
+      cx,
+      cy,
+      scale
+    )
+  }
+)
+
+loadMandelbrot(
+  -0.75,
+  0.1,
+  1
+)
