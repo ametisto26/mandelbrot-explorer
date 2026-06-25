@@ -64,6 +64,8 @@ async function loadMandelbrot(
   canvas.style.width = "800px"
   canvas.style.height = "800px"
 
+  canvas.style.imageRendering = "auto"  
+
   const imageData =
     ctx.createImageData(
       data.width,
@@ -81,7 +83,10 @@ async function loadMandelbrot(
       const i =
         (y * data.width + x) * 4
 
-      const c = colorMap(value, data.max_iter)
+      const c = colorMap(
+        value,
+        data.max_iter
+      )
 
       imageData.data[i]     = c.r
       imageData.data[i + 1] = c.g

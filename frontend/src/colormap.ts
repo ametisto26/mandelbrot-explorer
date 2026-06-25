@@ -13,7 +13,7 @@ export function colorMap(
 
   const t =
        Math.min(
-              Math.sqrt(value / maxIter),
+              value / maxIter,
               1
        )
 
