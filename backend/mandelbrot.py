@@ -1,11 +1,13 @@
 import numpy as np
+import time
 
 def calculate_mandelbrot(
     cx: float,
     cy: float,
     scale: float,
 ):
-    
+    start = time.perf_counter()
+
     # 最大反復回数
     max_iter = int(300 + 50 * np.log2(scale + 1))
 
@@ -14,7 +16,10 @@ def calculate_mandelbrot(
     base_height = 3.0
 
     # 解像度
-    width=int(300 + 300 * np.log2(scale + 1))
+    width = min(
+        int(300 + 100 * np.log2(scale + 1)),
+        1000
+    )
     height = width
     x_width = base_width / scale
     y_height = base_height / scale
@@ -88,6 +93,10 @@ def calculate_mandelbrot(
     divergence_step[mask] = 0
 
 
+    print(
+        f"calculate: "
+        f"{time.perf_counter() - start:.3f}s"
+    )
 
     return {
         "width": width,
