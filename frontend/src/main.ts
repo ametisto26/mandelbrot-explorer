@@ -1,3 +1,5 @@
+import { colorMap } from "./colormap"
+
 const app = document.querySelector<HTMLDivElement>("#app")!
 
 app.innerHTML = `
@@ -76,18 +78,14 @@ async function loadMandelbrot(
         data.height - 1 - y
       ][x]
 
-      const color =
-        Math.min(
-          255,
-          Math.floor(value)
-        )
-
       const i =
         (y * data.width + x) * 4
 
-      imageData.data[i]     = color
-      imageData.data[i + 1] = color
-      imageData.data[i + 2] = color
+      const c = colorMap(value, data.max_iter)
+
+      imageData.data[i]     = c.r
+      imageData.data[i + 1] = c.g
+      imageData.data[i + 2] = c.b
       imageData.data[i + 3] = 255
     }
   }

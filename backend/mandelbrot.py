@@ -102,4 +102,5 @@ def calculate_mandelbrot(
         "width": width,
         "height": height,
         "data": divergence_step.tolist(),
+        "max_iter": max_iter
     }
