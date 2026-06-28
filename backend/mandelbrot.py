@@ -92,15 +92,25 @@ def calculate_mandelbrot(
     # 最後まで発散しなかった点
     divergence_step[mask] = 0
 
+    calc_end = time.perf_counter()
 
-    print(
-        f"calculate: "
-        f"{time.perf_counter() - start:.3f}s"
-    )
-
-    return {
+    result = {
         "width": width,
         "height": height,
         "data": divergence_step.tolist(),
         "max_iter": max_iter
     }
+
+    json_end = time.perf_counter()
+
+    print(
+        f"calculate: "
+        f"{calc_end - start:.3f}s"
+    )
+
+    print(
+        f"tolist : "
+        f"{json_end - calc_end:.3f}s"
+    )
+
+    return result
