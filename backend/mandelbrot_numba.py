@@ -87,19 +87,39 @@ def _calculate(
     dx = (xmax - xmin) / (width - 1)
     dy = (ymax - ymin) / (height - 1)
 
+    # 2×2 スーパーサンプリング
+    offset = 0.25
+
     for py in prange(height):
-
-        cy = ymin + py * dy
-
         for px in range(width):
 
-            cx = xmin + px * dx
+            x0 = xmin + px * dx
+            y0 = ymin + py * dy
 
-            result[py, px] = _mandelbrot_value(
-                cx,
-                cy,
-                max_iter,
-            )
+            value = (
+                _mandelbrot_value(
+                    x0 + offset * dx,
+                    y0 + offset * dy,
+                    max_iter,
+                )
+                + _mandelbrot_value(
+                    x0 + (1.0 - offset) * dx,
+                    y0 + offset * dy,
+                    max_iter,
+                )
+                + _mandelbrot_value(
+                    x0 + offset * dx,
+                    y0 + (1.0 - offset) * dy,
+                    max_iter,
+                )
+                + _mandelbrot_value(
+                    x0 + (1.0 - offset) * dx,
+                    y0 + (1.0 - offset) * dy,
+                    max_iter,
+                )
+            ) * 0.25
+
+            result[py, px] = value
 
     return result
 
@@ -111,6 +131,7 @@ def calculate_mandelbrot(
 ):
     start = time.perf_counter()
 
+    # 最大反復回数
     max_iter = int(
         300 + 50 * np.log2(scale + 1)
     )
