@@ -116,10 +116,10 @@ def calculate_mandelbrot(
     # 解像度
     width = min(
         int(
-            300
-            + 100 * np.log2(scale + 1)
+            1200
+            + 150 * np.log2(scale + 1)
         ),
-        1000
+        2000
     )
 
     height = width
