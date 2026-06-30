@@ -12,6 +12,23 @@ FastAPI と TypeScript を用いて作成しているシンプルなマンデル
 
 バックエンドでマンデルブロ集合を計算し，フロントエンドで Canvas に描画します。
 
+## Screenshot
+
+The image below shows a highly detailed region near the boundary of the Mandelbrot set.
+
+![Mandelbrot Explorer](images/mbex_2048.png)
+
+**Rendering parameters**
+
+```text
+Center:
+cx = -0.3745
+cy = 0.6055
+scale = 2048
+```
+
+This region contains rich self-similar spiral structures that become increasingly detailed as the zoom level increases.
+
 ## Features / 機能
 
 - Mandelbrot set rendering
@@ -47,8 +64,8 @@ The Mandelbrot computation was optimized using **Numba JIT compilation** and **p
 | Numba JIT        | 0.96 s |
 | Numba + Parallel | 0.24 s |
 
-The benchmark was measured on the same machine using identical rendering parameters.
-Compared with the original NumPy implementation, the Numba + Parallel version achieved approximately **50× speedup**.
+The benchmark was performed on the same machine using identical rendering parameters.
+Compared with the original NumPy implementation, the Numba + Parallel implementation achieved approximately **50× speedup**.
 
 Numba の JIT コンパイルと並列実行を利用することで，元の NumPy 実装と比較して約 **50 倍** の高速化を達成しました。
 
@@ -56,6 +73,9 @@ Numba の JIT コンパイルと並列実行を利用することで，元の Nu
 
 ```
 mandelbrot-explorer/
+├── images/
+│   └── mbex_2048.PNG
+│
 ├── backend/
 │   ├── main.py
 │   ├── mandelbrot.py
@@ -95,13 +115,23 @@ Frontend URL:
 http://localhost:5173
 ```
 
-## Example
+## Example Coordinates
+
+### Personal Favorite
+
+```text
+cx    = -0.3745
+cy    = 0.6055
+scale = 2048
+```
 
 ```text
 cx    = -0.421
 cy    = 0.58
 scale = 256
 ```
+
+### Seahorse Valley
 
 ```text
 cx    = -0.743643887
