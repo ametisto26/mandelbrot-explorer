@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from mandelbrot import calculate_mandelbrot
+from mandelbrot_numba import calculate_mandelbrot
 
 app = FastAPI()
 

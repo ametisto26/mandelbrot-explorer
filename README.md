@@ -33,6 +33,20 @@ FastAPI と TypeScript を用いて作成しているシンプルなマンデル
 - カラーマップ対応
 - お気に入り座標の保存
 
+## Performance / パフォーマンス
+
+The Mandelbrot computation was optimized using **Numba JIT compilation** and **parallel execution**.
+
+| Implementation   |   Time |
+| ---------------- | -----: |
+| NumPy            | 12.5 s |
+| Numba JIT        | 0.96 s |
+| Numba + Parallel | 0.24 s |
+
+Approximately **50× faster** than the original NumPy implementation.
+
+Numba の JIT コンパイルと並列実行を利用することで，元の NumPy 実装と比較して約 **50 倍** の高速化を達成しました。
+
 ## Project Structure
 
 ```
@@ -40,6 +54,7 @@ mandelbrot-explorer/
 ├── backend/
 │   ├── main.py
 │   └── mandelbrot.py
+│   └── mandelbrot_numba.py
 │
 └── frontend/
     ├── src/
