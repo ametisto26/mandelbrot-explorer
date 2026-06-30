@@ -117,7 +117,7 @@ http://localhost:5173
 
 ## Example Coordinates
 
-### Personal Favorite
+### Favorite Regions
 
 ```text
 cx    = -0.3745
