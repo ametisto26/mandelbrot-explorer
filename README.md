@@ -18,6 +18,7 @@ FastAPI と TypeScript を用いて作成しているシンプルなマンデル
 - FastAPI backend
 - TypeScript frontend
 - HTML Canvas visualization
+- Numba-accelerated computation
 
 ### 現在実装済み
 
@@ -26,12 +27,15 @@ FastAPI と TypeScript を用いて作成しているシンプルなマンデル
 - Canvas への描画
 - パラメータ入力（cx, cy, scale）
 - スクロールによる拡大縮小
+- ドラッグによる移動
+- Numba による高速化
 
 ### 今後実装予定
 
 - クリックによるズーム
-- カラーマップ対応
 - お気に入り座標の保存
+- 描画品質の向上
+- 高解像度画像の保存
 
 ## Performance / パフォーマンス
 
@@ -43,7 +47,8 @@ The Mandelbrot computation was optimized using **Numba JIT compilation** and **p
 | Numba JIT        | 0.96 s |
 | Numba + Parallel | 0.24 s |
 
-Approximately **50× faster** than the original NumPy implementation.
+The benchmark was measured on the same machine using identical rendering parameters.
+Compared with the original NumPy implementation, the Numba + Parallel version achieved approximately **50× speedup**.
 
 Numba の JIT コンパイルと並列実行を利用することで，元の NumPy 実装と比較して約 **50 倍** の高速化を達成しました。
 
@@ -53,7 +58,7 @@ Numba の JIT コンパイルと並列実行を利用することで，元の Nu
 mandelbrot-explorer/
 ├── backend/
 │   ├── main.py
-│   └── mandelbrot.py
+│   ├── mandelbrot.py
 │   └── mandelbrot_numba.py
 │
 └── frontend/
