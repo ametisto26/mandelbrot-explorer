@@ -49,7 +49,6 @@ This region contains rich self-similar spiral structures that become increasingl
 
 ### 今後実装予定
 
-- クリックによるズーム
 - お気に入り座標の保存
 - 描画品質の向上
 - 高解像度画像の保存
